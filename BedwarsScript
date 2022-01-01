@@ -1,0 +1,25 @@
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+local Window = Library.CreateLib("Bedwars", "BloodTheme")
+local Tab = Window:NewTab("Main")
+local Section = Tab:NewSection("General")
+Section:NewButton("AntiKnockBack", "No knockback", function()
+    print("Clicked")
+local s = require(game:GetService("ReplicatedStorage").TS.damage["knockback-util"]).KnockbackUtil
+s.applyKnockbackDirection = function(...)end
+s.applyKnockback = function(...)end
+end)
+Section:NewButton("Reach", "Hit Further", function()
+    print("Clicked")
+local sword=game.Players.LocalPlayer.Backpack.Sword
+a=Instance.new("SelectionBox",sword.Handle)
+a.Adornee=sword.Handle
+sword.Handle.Size=Vector3.new(.5,.5,70)
+sword.Equipped:connect(function()
+while wait() do
+game.Workspace[game.Players.LocalPlayer.Name].sword.GripPos=Vector3.new(0,0,-30)
+end
+end)
+
+
+
+
