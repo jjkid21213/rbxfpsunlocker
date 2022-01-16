@@ -1,0 +1,198 @@
+-- Gui to Lua
+-- Version: 3.2
+
+-- Instances:
+
+local ScreenGui = Instance.new("ScreenGui")
+local Bedwars = Instance.new("Frame")
+local Speed = Instance.new("TextButton")
+local TextLabel = Instance.new("TextLabel")
+local AntiKnockback = Instance.new("TextButton")
+local KillAura = Instance.new("TextButton")
+local Aimbot = Instance.new("TextButton")
+local TextButton = Instance.new("TextButton")
+local BuyWool = Instance.new("TextButton")
+local InstantPickup = Instance.new("TextButton")
+
+--Properties:
+
+ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+Bedwars.Name = "Bedwars"
+Bedwars.Parent = ScreenGui
+Bedwars.BackgroundColor3 = Color3.fromRGB(24, 24, 24)
+Bedwars.BorderColor3 = Color3.fromRGB(255, 0, 0)
+Bedwars.Position = UDim2.new(0.0565085784, 0, 0.379097193, 0)
+Bedwars.Size = UDim2.new(0, 374, 0, 419)
+Bedwars.ZIndex = 2
+
+Speed.Name = "Speed"
+Speed.Parent = Bedwars
+Speed.BackgroundColor3 = Color3.fromRGB(16, 17, 16)
+Speed.BorderColor3 = Color3.fromRGB(24, 24, 24)
+Speed.Position = UDim2.new(0.105975308, 0, 0.263787597, 0)
+Speed.Size = UDim2.new(0, 306, 0, 42)
+Speed.Font = Enum.Font.Highway
+Speed.Text = "Speed"
+Speed.TextColor3 = Color3.fromRGB(255, 255, 255)
+Speed.TextSize = 25.000
+
+TextLabel.Parent = Bedwars
+TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel.BackgroundTransparency = 1.000
+TextLabel.Position = UDim2.new(8.15978041e-08, 0, 0, 0)
+TextLabel.Size = UDim2.new(0, 374, 0, 50)
+TextLabel.Font = Enum.Font.Highway
+TextLabel.Text = "BeamedWare"
+TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel.TextSize = 29.000
+TextLabel.TextWrapped = true
+
+AntiKnockback.Name = "AntiKnockback"
+AntiKnockback.Parent = Bedwars
+AntiKnockback.BackgroundColor3 = Color3.fromRGB(16, 17, 16)
+AntiKnockback.BorderColor3 = Color3.fromRGB(24, 24, 24)
+AntiKnockback.Position = UDim2.new(0.105975308, 0, 0.145030022, 0)
+AntiKnockback.Size = UDim2.new(0, 306, 0, 43)
+AntiKnockback.Font = Enum.Font.Highway
+AntiKnockback.Text = "AntiKnockback"
+AntiKnockback.TextColor3 = Color3.fromRGB(255, 255, 255)
+AntiKnockback.TextSize = 25.000
+AntiKnockback.MouseButton1Click:Connect(function()
+local s = require(game:GetService("ReplicatedStorage").TS.damage["knockback-util"]).KnockbackUtil
+s.applyKnockbackDirection = function(...)end
+s.applyKnockback = function(...)end
+end)
+
+KillAura.Name = "KillAura"
+KillAura.Parent = Bedwars
+KillAura.BackgroundColor3 = Color3.fromRGB(16, 17, 16)
+KillAura.BorderColor3 = Color3.fromRGB(24, 24, 24)
+KillAura.Position = UDim2.new(0.105975308, 0, 0.383559048, 0)
+KillAura.Size = UDim2.new(0, 306, 0, 47)
+KillAura.Font = Enum.Font.Highway
+KillAura.Text = "KillAura"
+KillAura.TextColor3 = Color3.fromRGB(255, 255, 255)
+KillAura.TextSize = 25.000
+KillAura.MouseButton1Click:Connect(function()
+	if KillAura then
+		KillAura = false
+		KillAura.Text = "Killaura"
+	else
+		Killaura = true
+		KillAura.Text = "Killaura (Toggled)"
+		repeat
+			wait(.1)
+			for i,v in pairs(game.Players:GetPlayers()) do
+				local vchr = v.Character
+				if vchr and v~=Player and v.Team~=Player.Team and Character and Character.Humanoid.Health>0 then
+					local vhum = vchr:FindFirstChild("Humanoid")
+					local vroot = vchr:FindFirstChild("HumanoidRootPart")
+					if vhum and vroot and vhum.Health>0 and (vroot.Position-Character.HumanoidRootPart.Position).magnitude<=Range then
+						RemoteFolder.SwordHit:InvokeServer({entityInstance=vchr,weapon=Character.HandInvItem.Value})
+					end
+				end
+			end
+		until not KillAura
+	end
+end)
+
+Aimbot.Name = "Aimbot"
+Aimbot.Parent = Bedwars
+Aimbot.BackgroundColor3 = Color3.fromRGB(16, 17, 16)
+Aimbot.BorderColor3 = Color3.fromRGB(24, 24, 24)
+Aimbot.Position = UDim2.new(0.105975308, 0, 0.513235867, 0)
+Aimbot.Size = UDim2.new(0, 306, 0, 46)
+Aimbot.Font = Enum.Font.Highway
+Aimbot.Text = "Aimbot"
+Aimbot.TextColor3 = Color3.fromRGB(255, 255, 255)
+Aimbot.TextSize = 25.000
+Aimbot.MouseButton1Click:Connect(function()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/CriShoux/OwlHub/master/OwlHub.txt"))();
+	end)
+
+TextButton.Parent = Bedwars
+TextButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextButton.BackgroundTransparency = 1.000
+TextButton.Position = UDim2.new(0.831272721, 0, 0.0300751887, 0)
+TextButton.Size = UDim2.new(0, 57, 0, 38)
+TextButton.Font = Enum.Font.Highway
+TextButton.Text = "X"
+TextButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextButton.TextSize = 29.000
+
+BuyWool.Name = "BuyWool"
+BuyWool.Parent = Bedwars
+BuyWool.BackgroundColor3 = Color3.fromRGB(16, 17, 16)
+BuyWool.BorderColor3 = Color3.fromRGB(24, 24, 24)
+BuyWool.Position = UDim2.new(0.105975308, 0, 0.637340903, 0)
+BuyWool.Size = UDim2.new(0, 306, 0, 47)
+BuyWool.Font = Enum.Font.Highway
+BuyWool.Text = "BuyWool"
+BuyWool.TextColor3 = Color3.fromRGB(255, 255, 255)
+BuyWool.TextSize = 25.000
+BuyWool.MouseButton1Click:Connect(function()
+	if Character and Character.Humanoid.Health>0 then
+		RemoteFolder.BedwarsPurchaseItem:InvokeServer({shopItem={price=8,currency="iron",itemType="wool_white",amount=16}})
+	end
+end)
+
+InstantPickup.Name = "InstantPickup"
+InstantPickup.Parent = Bedwars
+InstantPickup.BackgroundColor3 = Color3.fromRGB(16, 17, 16)
+InstantPickup.BorderColor3 = Color3.fromRGB(24, 24, 24)
+InstantPickup.Position = UDim2.new(0.105975308, 0, 0.763832569, 0)
+InstantPickup.Size = UDim2.new(0, 306, 0, 51)
+InstantPickup.Font = Enum.Font.Highway
+InstantPickup.Text = "InstantPickup"
+InstantPickup.TextColor3 = Color3.fromRGB(255, 255, 255)
+InstantPickup.TextSize = 25.000
+InstantPickup.MouseButton1Click:Connect(function()
+	if InstantPickActive then
+		InstantPickActive = false
+		InstantPickButton.Text = "Instant Pickup"
+	else
+		InstantPickActive = true
+		InstantPickButton.Text = "Instant Pickup (Toggled)"
+		repeat
+			wait()
+			for i,v in pairs(workspace.ItemDrops:GetChildren()) do
+				if Character and Character.Humanoid.Health>0 and (v.Position-Character.HumanoidRootPart.Position).magnitude<=10 then
+					local x,y,z = math.ceil(v.Position.X/3),math.ceil(v.Position.Y/3),math.ceil(v.Position.Z/3)
+					coroutine.wrap(function()
+						RemoteFolder.PickupItemDrop:InvokeServer({itemDrop=v})
+					end)()
+				end
+			end
+		until not InstantPickActive
+	end
+end)
+
+-- Scripts:
+
+local function UIIZHK_fake_script() -- TextButton.LocalScript 
+	local script = Instance.new('LocalScript', TextButton)
+
+	local bg = script.Parent.Parent.Frame
+	
+	script.Parent.MouseButton1Click:Connect(function()
+	
+		
+		if bg:TweenPosition(UDim2.new(0.34, 0,0.247, 0), Enum.EasingDirection.In, Enum.EasingStyle.Quint, 2) then
+			bg:TweenPosition(UDim2.new(0.542, 0, -0.433, 0), Enum.EasingDirection.In, Enum.EasingStyle.Quint, 2)
+		else
+			if	bg:TweenPosition(UDim2.new(0.542, 0, -0.433, 0), Enum.EasingDirection.In, Enum.EasingStyle.Quint, 2) then
+				bg:TweenPosition(UDim2.new(0.34, 0,0.247, 0), Enum.EasingDirection.In, Enum.EasingStyle.Quint, 2)
+			end
+			end
+	end)
+end
+coroutine.wrap(UIIZHK_fake_script)()
+local function ZLFLD_fake_script() -- ScreenGui.Script 
+	local script = Instance.new('Script', ScreenGui)
+
+	print("Hello world!")
+	
+end
+coroutine.wrap(ZLFLD_fake_script)()
